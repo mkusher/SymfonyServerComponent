@@ -1,6 +1,6 @@
 {
     "name": "mkusher/symfony-server-component",
-    "description": "Server classes for running symfony as standalone app",
+    "description": "This set of tools that allows you to run your symfony application on react-http server or as RPC-server through AMQP.",
     "keywords": ["http", "amqp", "server"],
     "license": "MIT",
     "authors": [
