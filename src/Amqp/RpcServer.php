@@ -9,11 +9,11 @@ use Mkusher\SymfonyServerComponent\Server\AbstractServer;
 class RpcServer extends AbstractServer {
     public function run($config = []){
         $this->createConnection($config);
+        $this->queue = '';
+        $this->tag = '';
         $this->routingKey = $config['routing_key'];
         $this->initExchange($config['exchange']);
         $this->initQueue();
-        $this->queue = '';
-        $this->tag = '';
 
         $this->getChannel()
             ->basic_consume($this->getQueue(), $this->tag, false, false, false, false, [$this, 'onMessage']);
@@ -72,7 +72,7 @@ class RpcServer extends AbstractServer {
     protected function initQueue(){
 
         list($this->queue, ,) = $this->getChannel()->queue_declare($this->queue, false, false, false, false);
-        $this->getChannel()->queu1e_bind($this->queue, $this->exchange, $this->routingKey);
+        $this->getChannel()->queue_bind($this->queue, $this->exchange, $this->routingKey);
     }
 
     public function __destruct(){
