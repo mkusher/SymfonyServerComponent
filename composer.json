@@ -1,0 +1,21 @@
+{
+    "name": "mkusher/symfony-server-component",
+    "description": "Server classes for running symfony as standalone app",
+    "keywords": ["http", "amqp", "server"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Aleh Kashnikau",
+            "email": "aleh.kashnikau@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "Mkusher\\SymfonyServerComponent": "src/"
+        }
+    },
+    "require": {
+        "symfony/http-foundation": ">=2.3,<2.6-dev"
+    }
+}
