@@ -32,10 +32,6 @@ class Server extends AbstractServer {
         $request = Request::createFromReact($reactRequest, $data);
         $response = new Response($reactResponse);
         $this->emit('request', [$request, $response]);
-        $this->sendResponse($response);
-    }
-
-    public function sendResponse(Response $response){
         $response->send();
     }
 
