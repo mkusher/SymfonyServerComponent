@@ -9,6 +9,7 @@ use Mkusher\SymfonyServerComponent\Server\AbstractServer;
 class RpcServer extends AbstractServer {
     public function run($config = []){
         $this->createConnection($config);
+        $this->routingKey = $config['routing_key'];
         $this->initExchange($config['exchange']);
         $this->initQueue();
         $this->queue = '';
@@ -29,6 +30,7 @@ class RpcServer extends AbstractServer {
         $request = Request::createFromAmqpMessage($message);
         $response = new Response($this->getChannel(), $this->getExchange(), $message->id);
         $this->emit('message', [$request, $response]);
+        $response->send();
     }
 
     /**
@@ -70,7 +72,7 @@ class RpcServer extends AbstractServer {
     protected function initQueue(){
 
         list($this->queue, ,) = $this->getChannel()->queue_declare($this->queue, false, false, false, false);
-        $this->getChannel()->queue_bind($this->queue, $this->exchange, 'login-call');
+        $this->getChannel()->queu1e_bind($this->queue, $this->exchange, $this->routingKey);
     }
 
     public function __destruct(){
@@ -78,6 +80,7 @@ class RpcServer extends AbstractServer {
         $this->getConnection()->close();
     }
 
+    protected $routingKey;
     protected $tag;
     protected $queue;
     protected $exchange;
