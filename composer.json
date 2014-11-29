@@ -9,7 +9,6 @@
             "email": "aleh.kashnikau@gmail.com"
         }
     ],
-    "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
             "Mkusher\\SymfonyServerComponent\\": "src/"
